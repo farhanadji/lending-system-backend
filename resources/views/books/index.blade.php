@@ -18,6 +18,7 @@
                 <th>Title</th>
                 <th>Author</th>
                 <th>Price</th>
+                <th>Total Borrowed</th>
                 <th width="280px">Action</th>
             </tr>
         </thead>
@@ -94,6 +95,7 @@
             {data: 'title', name: 'title', "defaultContent": ""},
             {data: 'author', name: 'author', "defaultContent": ""},
             {data: 'price', name: 'price', "defaultContent": ""},
+            {data: 'count', name: 'count', "defaultContent": ""},
             {data: 'action', name: 'action', orderable: false, searchable: false, "defaultContent": ""},
         ]
     });

@@ -9,7 +9,7 @@ class Transaction extends Model
 
 
     protected $fillable = [
-        'user_id',
+        'user_id', 'borrow_date', 'return_date', 'status'
     ];
 
     public function user(){

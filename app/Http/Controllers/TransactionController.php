@@ -26,8 +26,8 @@ class TransactionController extends Controller
     public function index()
     {
         if(request()->ajax()){
-            $data = Transaction::select('transactions.id','users.name as user_name', 'user_id', 'transactions.status',
-            'total_price', 'borrow_date', 'return_date')->leftJoin('users','transactions.user_id', '=',  'users.id')->get();
+            $data = Transaction::select('transactions.id','users.name as user_name', 'book_transaction.book_id as book_id', 'books.title as book_name','user_id', 'transactions.status',
+            'total_price', 'borrow_date', 'return_date')->leftJoin('book_transaction','transactions.id','=','book_transaction.transaction_id')->leftJoin('books','book_transaction.book_id','=','books.id')->leftJoin('users','transactions.user_id', '=',  'users.id')->get();
 
             return Datatables::of($data)->addIndexColumn()->addColumn('action', function($row){
                 $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editTransaction">Edit</a>';
@@ -84,7 +84,8 @@ class TransactionController extends Controller
     public function destroy($id)
     {   
         Transaction::find($id)->delete();
-     
+        
+
         return response()->json(['success'=>'Transaction deleted successfully.']);
     }
 }

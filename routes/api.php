@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function () {
+    Route::post('/apilogout', 'AuthController@logout');
+    Route::post('/apiborrow','TransactionApiController@borrow');
+    Route::get('/apimytransaction','TransactionApiController@mytransaction');
 });
+
+//PUBLIC
+Route::get('/apibooks','bookapi@index');
+Route::get('/apibooks/{id}', 'bookapi@detail');
+Route::post('/apilogin', 'AuthController@login');
+Route::post('/apiregister', 'AuthController@register');

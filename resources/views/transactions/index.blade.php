@@ -11,6 +11,7 @@
             <tr>
                 <th>No</th>
                 <th>Customer Name</th>
+                <th>Book Name</th>
                 <th>Lending Date</th>
                 <th>Return Date</th>
                 <th>Status</th>
@@ -115,6 +116,7 @@
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex' , "defaultContent": ""},
             {data: 'user_name', name: 'user_name', "defaultContent": ""},
+            {data: 'book_name', name: 'book_name', "defaultContent": ""},
             {data: 'borrow_date', name: 'borrow_date', "defaultContent": ""},
             {data: 'return_date', name: 'return_date', "defaultContent": ""},
             {data: 'status', name: 'status', "defaultContent": ""},
