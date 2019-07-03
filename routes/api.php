@@ -20,7 +20,9 @@ Route::middleware('auth:api')->group(function () {
 });
 
 //PUBLIC
+Route::get('/', 'AuthController@login');
 Route::get('/apibooks','bookapi@index');
 Route::get('/apibooks/{id}', 'bookapi@detail');
 Route::post('/apilogin', 'AuthController@login');
 Route::post('/apiregister', 'AuthController@register');
+Route::get('/apialltransaction', 'TransactionApiController@alltransaction');

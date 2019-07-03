@@ -28,12 +28,12 @@ class TransactionApiController extends Controller
             $transaction->return_date = $request->return_date;
 
             //date to int
-            $borrowdate = $request->borrow_date;
-            $returndate = $request->return_date;
-            $date1 = new DateTime($borrowdate);
-            $date2 = new DateTime($returndate);
-            $interval = $date1->diff($date2);
-            $days = $interval->format('%a');
+            // $borrowdate = $request->borrow_date;
+            // $returndate = $request->return_date;
+            // $date1 = new DateTime($borrowdate);
+            // $date2 = new DateTime($returndate);
+            // $interval = $date1->diff($date2);
+            // $days = $interval->format('%a');
 
 
             $transaction->status = 'BORROWED';
@@ -45,14 +45,14 @@ class TransactionApiController extends Controller
                     $book->count = $book->count + 1;
                     $book->save();
                     
-                    $calculate_price = $days * $book->price;
+                    // $calculate_price = $days * $book->price;
 
                     $book_transaction = new Book_transaction;
                     $book_transaction->book_id = $book->id;
                     $book_transaction->transaction_id = $transaction->id;
                     $book_transaction->save();
 
-                    $transaction->total_price = $calculate_price;
+                    $transaction->total_price = $request->total_price;
                     $transaction->save();
                 }
             }
@@ -83,6 +83,27 @@ class TransactionApiController extends Controller
             $data = $transaction;
         }else{
             $message = "not found";
+        }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+            'data' => $data
+        ],200);
+    }
+
+    public function alltransaction(Request $request){
+        $status = "error";
+        $message = "";
+        $data = [];
+
+        $transaction = Transaction::select('*')->get();
+        if($transaction){
+            $status = "success";
+            $message = "transaction all data";
+            $data = $transaction;
+        }else{
+            $message = "no data";
         }
 
         return response()->json([
